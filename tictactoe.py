@@ -145,16 +145,23 @@ def tictactoe_simul(grid: list[str]) -> int:
         ro: int = 0
         co: int = 0
 
+        # X's Move
+
         rx, cx = ask_x()
         new_row: str = get_x_move(rx, cx, grid)
         grid.pop(rx)
         grid.insert(rx, new_row)
-        
+
         print("After X's Move: ")
         print_grid(grid)
 
         if check_win_horizontals(grid) or check_win_verticals(grid) or check_win_diagonals(grid):
             return 1
+
+        if not check_still_empty(grid):
+            break
+            
+        # O's Move
 
         ro, co = ask_o()
         new_row: str = get_o_move(ro, co, grid)
@@ -166,7 +173,6 @@ def tictactoe_simul(grid: list[str]) -> int:
 
         if check_win_horizontals(grid) or check_win_verticals(grid) or check_win_diagonals(grid):
             return 2
-         
     return 0
 
 result: int = tictactoe_simul(grid)
